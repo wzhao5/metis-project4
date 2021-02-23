@@ -1,0 +1,6 @@
+# python
+__pycache__
+*pyc
+*egg-info*
+# jupyter
+**/.ipynb_checkpoints
