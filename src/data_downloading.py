@@ -6,28 +6,31 @@ This file is to query and download data from PubMed
 @author: Wei Zhao @ Metis, 02/12/2021
 """
 #%%
-from util import *
 from pymed import PubMed
+from util import save_as_pickle
 from collections import defaultdict
 
 #%%
 pubmed = PubMed(tool="MyTool", email="")
-query = ['((traumatic brain injury) ' + 
-         'OR (concussion) ' + 
+query = ['((traumatic brain injury) ' +
+         'OR (concussion) ' +
          'OR (brain biomechanics)) ' +
-         'AND ("1991/01/01"[Date - Create] : "3000"[Date - Create])' + 
+         'AND ("1991/01/01"[Date - Create] : "3000"[Date - Create])' +
          'AND (english[Language])'
          ]
 results = pubmed.query(query, max_results=12000000)
 
 #%%
 def download_data(results):
+    """
+    Download the data
+    """
     # Loop over the retrieved articles
     data_dict = defaultdict(list)
     c = 0
     for article in results:
         c += 1
-        if c%1200 == 0:      
+        if c%1200 == 0:
             print(c)
         # Extract and format information from the article
         data_dict['article_id'].append( article.pubmed_id)
@@ -42,13 +45,13 @@ def download_data(results):
             data_dict['journal'].append(article.journal)
         #-----------------------------------------------------
         if not hasattr(article, 'keywords'):
-           data_dict['keywords'].append('Nan')
+            data_dict['keywords'].append('Nan')
         else:
             if article.keywords:
                 if None in article.keywords:
                     article.keywords.remove(None)
             data_dict['keywords'].append('", "'.join(article.keywords))
-        #-----------------------------------------------------    
+        #-----------------------------------------------------
         data_dict['publication_date'].append(article.publication_date)
         #-----------------------------------------------------
         data_dict['abstract'].append(article.abstract)
@@ -58,12 +61,15 @@ def download_data(results):
         else:
             data_dict['publication_type'].append(article.publication_type)
 
-    #-----------------------------------------------------    
+    #-----------------------------------------------------
     fn = '../data/data.pickle'
     save_as_pickle(fn, data_dict)
 
 #%%
 def main(results):
+    """
+    Run data downloading
+    """
     download_data(results)
 
 if __name__ == '__main__':

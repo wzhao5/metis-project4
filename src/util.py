@@ -7,14 +7,12 @@ Created on Fri Feb 12 21:34:08 2021
 """
 import pickle
 import string
-import nltk
-from nltk.tokenize import word_tokenize
-from textblob import TextBlob, Word
-from nltk import word_tokenize, pos_tag
+from textblob import Word
+from nltk import word_tokenize
+from nltk import pos_tag
 import re
 from collections import defaultdict
 from itertools import chain
-import nltk
 from nltk.corpus import stopwords
 import matplotlib.pyplot as plt
 #%%
@@ -72,10 +70,7 @@ def remove_punctuation(txt):
         text output with no punctuation.
 
     """
-    
-    # no_punct = [words for words in text
-    #             if words not in string.punctuation]
-    # words_wo_punct = ''.join(no_punct)
+
     words_wo_punct = re.sub('[%s]' % re.escape(string.punctuation+'≥'+'≤'),
                             ' ', txt)
 
@@ -118,7 +113,7 @@ def paragraph_lemma(txt):
     token_word = word_tokenize(txt)
     lemma_txt = ' '.join([Word(word.lower()).lemmatize()
                       for word in token_word
-                      if len(Word(word.lower()).lemmatize()) > 1])   
+                      if len(Word(word.lower()).lemmatize()) > 1])
     return lemma_txt
 #--------------------------------------------------------
 def get_nouns(txt):
@@ -127,7 +122,7 @@ def get_nouns(txt):
     is_noun = lambda pos: pos[:2] == 'NN'
     tokenized = word_tokenize(txt)
     all_nouns = [word for (word, pos) in pos_tag(tokenized)
-                 if is_noun(pos)] 
+                 if is_noun(pos)]
     return ' '.join(all_nouns)
 #--------------------------------------------------------
 def get_nouns_adj(text):
@@ -136,12 +131,38 @@ def get_nouns_adj(text):
     is_noun_adj = lambda pos: pos[:2] == 'NN' or pos[:2] == 'JJ'
     tokenized = word_tokenize(text)
     nouns_adj = [word for (word, pos) in pos_tag(tokenized)
-                 if is_noun_adj(pos)] 
+                 if is_noun_adj(pos)]
     return ' '.join(nouns_adj)
 #--------------------------------------------------------
-def display_topics(model, feature_names, no_top_words,                   
+def display_topics(model, feature_names, no_top_words,
                    no_topic_to_plot=20, topic_names=None,
                    display=False):
+    """
+    Display and store topic words in a dictionary
+
+    Parameters
+    ----------
+    model : NMF model
+        An NMF model.
+    feature_names : list
+        get feature from vesterizer.
+    no_top_words : int
+        number of topic words.
+    no_topic_to_plot : int, optional
+        number of topic to plot. The default is 20.
+    topic_names : list, optional
+        topic name. The default is None.
+    display : bool, optional
+        Display or not display with generating
+        the topic word dictionary only.
+        The default is False.
+
+    Returns
+    -------
+    output : dictionary
+        Topic word dictionary.
+
+    """
     output = defaultdict(list)
     if display:
         for ix, topic in enumerate(model.components_):
@@ -149,7 +170,7 @@ def display_topics(model, feature_names, no_top_words,
                 print("\nTopic ", ix)
             else:
                 print("\nTopic: '",topic_names[ix],"'")
-    
+
             print(", ".join([feature_names[i]
                             for i in topic.argsort()[:-no_top_words - 1:-1]]))
             if ix >= no_topic_to_plot-1:
@@ -162,6 +183,20 @@ def display_topics(model, feature_names, no_top_words,
     return output
 #--------------------------------------------------------
 def del_abbreviation(txt):
+    """
+    Delete abbreviations
+
+    Parameters
+    ----------
+    txt : str
+        Texts with abbreviations.
+
+    Returns
+    -------
+    txt : str
+        Texts without abbreviations..
+
+    """
     while 'mtbi' in txt:
         txt.remove('mtbi')
     while 'tbi' in txt:
@@ -175,17 +210,35 @@ def del_abbreviation(txt):
     return txt
 #--------------------------------------------------------
 def merge_ngrams(word_list, dict_ngrams, exception_dict):
+    """
+    Merge words to ngrams.
 
+    Parameters
+    ----------
+    word_list : list
+        List of single words.
+    dict_ngrams : dictionary
+        dict_ngrams includes bi, tri, and quangrams.
+        Each ngram is a list.
+    exception_dict : list
+        A list of words to be excluded.
+
+    Returns
+    -------
+    word_list_ngrams_merged : list
+        word list with ngrams.
+
+    """
     exception = dict_ngrams['quagrams'] \
                 + dict_ngrams['trigrams'] \
                 + dict_ngrams['bigrams'] \
                 + stopwords.words('english') \
                 + exception_dict
-    
+
     exception = list(set(chain
                          .from_iterable([e.split(' ')
                                          for e in exception])))
-    
+
     word_list_ngrams_merged = []
     i = 0
     while i < len(word_list):
@@ -209,14 +262,6 @@ def merge_ngrams(word_list, dict_ngrams, exception_dict):
             i += 1
     return word_list_ngrams_merged
 #--------------------------------------------------------
-# def dummy(doc):
-    # """
-    # Dummy tokenizer to avoid tokenization
-    # when vectorizing the data
-    # """
-    # return [doc]
-
-#--------------------------------------------------------
 def plot_top_words(model, feature_names,
                    n_top_words, title, no_docs,
                    figsize):
@@ -228,7 +273,7 @@ def plot_top_words(model, feature_names,
         weights = topic[top_features_ind]
 
         ax = axes[topic_idx]
-        
+
         ax.barh(top_features, weights, height=0.7)
         ax.set_title('Topic {0} ({1} papers)'
                      .format(topic_idx+1,
@@ -249,28 +294,26 @@ def dummy(doc):
     return doc2
 #--------------------------------------------------------
 def store_topic_words(model_dict, vectorizer_dict):
+    """
+    Store topic words in a list.
+
+    Parameters
+    ----------
+    model_dict : dictionary
+        A dictionary with all NMF models stored.
+    vectorizer_dict : dictionary
+        A dictionary with all vecterizers stored.
+
+    Returns
+    -------
+    topic_words : dictionary
+        A dictionary with all topic words stored.
+
+    """
     years = range(1991, 2022)
     topic_words=defaultdict(list)
     for y in years:
         words = vectorizer_dict[y].get_feature_names()
         topic_word_yearly = model_dict[y].components_.argsort(axis=1)[:,-1:-11:-1]
         topic_words[y] = [[words[e] for e in l] for l in topic_word_yearly]
-    return topic_words       
-#%%
-if __name__ == '__main__':
-    import spacy
-    sp = spacy.load('en_core_web_sm')
-    
-    sp('The striped bats are hanging on their feet for best"').lemma_
-
-    #%%
-    import nltk
-    from nltk.stem import WordNetLemmatizer 
-    # Init the Wordnet Lemmatizer
-    lemmatizer = WordNetLemmatizer()
-    
-    lemmatizer.lemmatize('was')
-
-
-
-
+    return topic_words

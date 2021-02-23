@@ -7,7 +7,8 @@ This file is to query and download data from PubMed
 """
 #%%
 import pandas as pd
-from util import *
+from util import remove_punctuation
+from util import read_from_pickle
 #%%
 def get_first_author(txt):
     '''
@@ -48,7 +49,7 @@ def get_last_author(txt):
     name : str
         Full name of the last author.
 
-    '''    
+    '''
     first = txt[-1]['firstname']
     last = txt[-1]['lastname']
     if first is None:
@@ -81,7 +82,7 @@ def get_publication_year(data):
 #-----------------------------------------------------
 def clean_journal_title(txt):
     '''
-    Function to clean journal title so that 
+    Function to clean journal title so that
     only main title remains
 
     Parameters
@@ -102,9 +103,9 @@ def clean_journal_title(txt):
     elif '(' in txt:
         txt_split = txt.split('(')
         return txt_split[0]
-        
+
     return txt
-    
+
 #-----------------------------------------------------
 def data_cleaning(df):
 
@@ -125,7 +126,7 @@ def data_cleaning(df):
     df = df.drop(idx, inplace=False)
     df = df.drop('publication_date', axis=1)
     df.dropna(subset=['abstract', 'title'], axis=0, inplace=True)
-    
+
     df['title'] = df['title'].apply(remove_punctuation)
     df['journal'] = df['journal'].apply(clean_journal_title)
 
@@ -140,7 +141,3 @@ if __name__ == '__main__':
     data = read_from_pickle(fn)
     df = pd.DataFrame(data)
     df = main(df)
-
-
-
-

@@ -1,0 +1,173 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Feb 12 21:34:08 2021
+
+@author: Wei Zhao @ Metis, 02/12/2021
+"""
+import pickle
+import string
+import nltk
+from nltk.tokenize import word_tokenize
+from textblob import TextBlob, Word
+from nltk import word_tokenize, pos_tag
+import re
+from collections import defaultdict
+#%%
+#--------------------------------------------------------
+def save_as_pickle(fn, data):
+    """
+    Function to save data as a pickled file
+    Parameters
+    ----------
+    fn : str
+        File directory.
+    data : any type, but recommend dictionary
+        data to save.
+    Returns
+    -------
+    None.
+    """
+    with open(fn, 'wb') as to_write:
+        pickle.dump(data, to_write)
+    print('Saved data to "' + fn + '"')
+
+#--------------------------------------------------------
+def read_from_pickle(fn):
+    """
+    Function to read data from a pickled file
+    Parameters
+    ----------
+    fn : str
+        File directory.
+    data : any type, but recommend dictionary
+        data to read.
+    Returns
+    -------
+    data : same as data
+        Read in this variable.
+    """
+    with open(fn,'rb') as read_file:
+        data = pickle.load(read_file)
+    print('Read data from "' + fn + '"')
+    return data
+
+#--------------------------------------------------------
+def remove_punctuation(txt):
+    """
+    Function to remove punctuation in sensences.
+
+    Parameters
+    ----------
+    text : str
+        text input with punctuation.
+
+    Returns
+    -------
+    words_wo_punct : str
+        text output with no punctuation.
+
+    """
+    
+    # no_punct = [words for words in text
+    #             if words not in string.punctuation]
+    # words_wo_punct = ''.join(no_punct)
+    words_wo_punct = re.sub('[%s]' % re.escape(string.punctuation),
+                            '', txt)
+
+    return words_wo_punct
+#--------------------------------------------------------
+def remove_num(txt):
+    """
+    remove numbers in text
+
+    Parameters
+    ----------
+    txt : str
+        text with numbers.
+
+    Returns
+    -------
+    txt : str
+        text without numbers.
+
+    """
+    txt = re.sub('\w*\d\w*', '', txt)
+    return txt
+#%%
+def paragraph_lemma(txt):
+    """
+    Lemmatize a paragraph.
+
+    Parameters
+    ----------
+    txt : str
+        Texts after removing numbers and punctuations.
+
+    Returns
+    -------
+    lemma_txt : str
+        lemmatized paragraph with
+        each word being lowercase.
+
+    """
+    token_word = word_tokenize(txt)
+    lemma_txt = ' '.join([Word(word.lower()).lemmatize()
+                      for word in token_word
+                      if len(Word(word.lower()).lemmatize()) > 1])   
+    return lemma_txt
+#--------------------------------------------------------
+def get_nouns(txt):
+    '''Given a string of text, tokenize the text and
+    pull out only the nouns.'''
+    is_noun = lambda pos: pos[:2] == 'NN'
+    tokenized = word_tokenize(txt)
+    all_nouns = [word for (word, pos) in pos_tag(tokenized)
+                 if is_noun(pos)] 
+    return ' '.join(all_nouns)
+#--------------------------------------------------------
+def get_nouns_adj(text):
+    '''Given a string of text, tokenize the text and
+    pull out only the nouns and adjectives.'''
+    is_noun_adj = lambda pos: pos[:2] == 'NN' or pos[:2] == 'JJ'
+    tokenized = word_tokenize(text)
+    nouns_adj = [word for (word, pos) in pos_tag(tokenized)
+                 if is_noun_adj(pos)] 
+    return ' '.join(nouns_adj)
+#--------------------------------------------------------
+def display_topics(model, feature_names, no_top_words,
+                   no_topic_to_plot=None, topic_names=None):
+    output = defaultdict(list)
+    for ix, topic in enumerate(model.components_):
+        if not topic_names or not topic_names[ix]:
+            print("\nTopic ", ix)
+        else:
+            print("\nTopic: '",topic_names[ix],"'")
+        print(", ".join([feature_names[i]
+                        for i in topic.argsort()[:-no_top_words - 1:-1]]))
+        if ix >= no_topic_to_plot-1:
+            break
+
+    for ix, topic in enumerate(model.components_):
+        output[ix] = ", ".join([feature_names[i]
+                                for i in topic.argsort()[:-no_top_words - 1:-1]])
+
+    return output     
+#%%
+if __name__ == '__main__':
+    import spacy
+    sp = spacy.load('en_core_web_sm')
+    
+    sp('The striped bats are hanging on their feet for best"').lemma_
+
+    #%%
+    import nltk
+    from nltk.stem import WordNetLemmatizer 
+    # Init the Wordnet Lemmatizer
+    lemmatizer = WordNetLemmatizer()
+    
+    lemmatizer.lemmatize('was')
+
+
+
+
