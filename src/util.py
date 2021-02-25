@@ -15,6 +15,10 @@ from collections import defaultdict
 from itertools import chain
 from nltk.corpus import stopwords
 import matplotlib.pyplot as plt
+
+from math import sqrt
+from statsmodels.tsa.arima.model import ARIMA
+from sklearn.metrics import mean_squared_error
 #%%
 #--------------------------------------------------------
 def save_as_pickle(fn, data):
@@ -263,9 +267,9 @@ def merge_ngrams(word_list, dict_ngrams, exception_dict):
     return word_list_ngrams_merged
 #--------------------------------------------------------
 def plot_top_words(model, feature_names,
-                   n_top_words, title, no_docs,
-                   figsize):
-    fig, axes = plt.subplots(2, 3, figsize=figsize, sharex=True)
+                   n_top_words, no_docs,
+                   figsize, topic_name):
+    fig, axes = plt.subplots(5, 4, figsize=figsize, sharex=True)
     axes = axes.flatten()
     for topic_idx, topic in enumerate(model.components_):
         top_features_ind = topic.argsort()[:-n_top_words - 1:-1]
@@ -275,15 +279,14 @@ def plot_top_words(model, feature_names,
         ax = axes[topic_idx]
 
         ax.barh(top_features, weights, height=0.7)
-        ax.set_title('Topic {0} ({1} papers)'
-                     .format(topic_idx+1,
+        ax.set_title('{0}\n ({1} papers)'
+                     .format(topic_name[topic_idx],
                              no_docs.values[no_docs.index[topic_idx]]),
-                     fontdict={'fontsize': 30})
+                     fontdict={'fontsize': 25})
         ax.invert_yaxis()
         ax.tick_params(axis='both', which='major', labelsize=25)
         for i in 'top right left'.split():
             ax.spines[i].set_visible(False)
-        fig.suptitle(title, fontsize=35)
 #--------------------------------------------------------
 def dummy(doc):
     """
@@ -317,3 +320,85 @@ def store_topic_words(model_dict, vectorizer_dict):
         topic_word_yearly = model_dict[y].components_.argsort(axis=1)[:,-1:-11:-1]
         topic_words[y] = [[words[e] for e in l] for l in topic_word_yearly]
     return topic_words
+#--------------------------------------------------------
+# REF: https://machinelearningmastery.com/grid-search-arima-hyperparameters-with-python/
+def evaluate_arima_model(X, arima_order, training_portion=0.66):
+    """
+    Function to evaluate arima model.
+
+    Parameters
+    ----------
+    X : array or list
+        All dataset.
+    arima_order : tuple
+        The (p,d,q) order of the model for
+        the number of AR parameters,
+        differences, and MA parameters to use.
+    training_portion : float, optional
+        portion of training data. The default is 0.66.
+
+    Returns
+    -------
+    rmse : float
+        root mean squared error.
+
+    """
+    # prepare training dataset
+    train_size = int(len(X) * training_portion)
+    train, test = X[0:train_size], X[train_size:]
+    history = [x for x in train]
+    # make predictions
+    predictions = list()
+    for t in range(len(test)):
+        model = ARIMA(history, order=arima_order)
+        model_fit = model.fit()
+        yhat = model_fit.forecast()[0]
+        predictions.append(yhat)
+        history.append(test[t])
+    # calculate out of sample error
+    rmse = sqrt(mean_squared_error(test, predictions))
+    return rmse
+# evaluate combinations of p, d and q values for an ARIMA model
+def evaluate_models(dataset,
+                    p_values,
+                    d_values,
+                    q_values,
+                    training_portion=0.66):
+    """
+    Fucntion to tune hyperparameters of arima model 
+
+    Parameters
+    ----------
+    dataset : array or list
+        All dataset.
+    p_values : int
+        parameter for autoregression.
+    d_values : int
+        parameter for differentiation.
+    q_values : int
+        parameter for moving average.
+    training_portion : float, optional
+        portion of training data. The default is 0.66.
+
+    Returns best_cfg, best_score
+    -------
+    best_cfg: best configuration of p, d, and q.
+    best score: smallest rmse value.
+
+    """
+    dataset = dataset.astype('float32')
+    best_score, best_cfg = float("inf"), None
+    for p in p_values:
+        for d in d_values:
+            for q in q_values:
+                order = (p,d,q)
+                try:
+                    rmse = evaluate_arima_model(dataset, order, training_portion=training_portion)
+                    if rmse < best_score:
+                        best_score, best_cfg = rmse, order
+#                     print('ARIMA%s RMSE=%.3f' % (order,rmse))
+                except:
+                    continue
+    print('Best ARIMA%s RMSE=%.3f' % (best_cfg, best_score))
+    return best_cfg, best_score
+
