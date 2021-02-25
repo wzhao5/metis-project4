@@ -38,7 +38,7 @@ xx
 
 
 
-<img src="https://github.com/weizhao-BME/metis-project4/blob/main/figures/topic_modeling_workflow.png" alt="Figure 1" width="500"/>
+<img src="https://github.com/weizhao-BME/metis-project4/blob/main/figures/topic_modeling_workflow.png" alt="Figure 1" width="700"/>
 
 
 
