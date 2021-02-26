@@ -52,19 +52,19 @@ The results show five examples of topic development for illustration.
 
 
 
-<img src="https://github.com/weizhao-BME/metis-project4/blob/main/figures/fig.2.png" alt="Figure 3" width="700"/>
+<img src="https://github.com/weizhao-BME/metis-project4/blob/main/figures/fig.3.png" alt="Figure 3" width="700"/>
 
 
 
-<img src="https://github.com/weizhao-BME/metis-project4/blob/main/figures/fig.2.png" alt="Figure 4" width="700"/>
+<img src="https://github.com/weizhao-BME/metis-project4/blob/main/figures/fig.4.png" alt="Figure 4" width="700"/>
 
 
 
-<img src="https://github.com/weizhao-BME/metis-project4/blob/main/figures/fig.2.png" alt="Figure 5" width="700"/>
+<img src="https://github.com/weizhao-BME/metis-project4/blob/main/figures/fig.5.png" alt="Figure 5" width="700"/>
 
 
 
-<img src="https://github.com/weizhao-BME/metis-project4/blob/main/figures/fig.2.png" alt="Figure 6" width="700"/>
+<img src="https://github.com/weizhao-BME/metis-project4/blob/main/figures/fig.6.png" alt="Figure 6" width="700"/>
 
 
 
