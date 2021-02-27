@@ -44,15 +44,11 @@ First, term frequency–inverse document frequency (TF-IDF) vectorizer were used
 
 ### Results and Discussion
 
-
-
-
-
-
+The figure below shows the total counts of publications each year, demonstrating that this research field is expanding. Note that 2021 just started when this repo was written.  
 
 <img src="https://github.com/weizhao-BME/metis-project4/blob/main/figures/counts_of_publications.svg" alt="counts of pub" width="700"/>
 
-
+Top 10 most popular journals have been identified
 
 
 
