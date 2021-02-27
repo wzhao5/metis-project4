@@ -2,7 +2,7 @@
 
 ---
 
-## **Investigation of Research Topic Development on Traumatic Brain injury**
+## **Investigation of Research Topic Development on Traumatic Brain Injury**
 
 **Topic Modeling**
 
