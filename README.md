@@ -60,7 +60,7 @@ The results show five examples of topic development for illustration. First, for
 
 <img src="https://github.com/weizhao-BME/metis-project4/blob/main/figures/fig.2.png" alt="Figure 2" width="700"/>
 
-Researchers become less interested in the intracranial pressure now compared with 1990s. In the past, it was believed the pressure gradient could distort the brain and caused concussion ([King et al., 2013]([0.1 Is Head Injury Caused by Linear or Angular Acceleration? (smf.org)](https://smf.org/docs/articles/hic/King_IRCOBI_2003.pdf))), but more recently it was believed that the brain pressure which is induced by linear acceleration did not  induce brain deformation in TBI. This is because linear acceleration is not significantly correlated with brain deformation ([Ji et al., 2014]([Head impact accelerations for brain strain-related responses in contact sports: a model-based investigation | SpringerLink](https://link.springer.com/article/10.1007%2Fs10237-014-0562-z))).  
+Researchers become less interested in the intracranial pressure now compared with 1990s. In the past, it was believed the pressure gradient could distort the brain and caused concussion ([King et al., 2013](https://smf.org/docs/articles/hic/King_IRCOBI_2003.pdf)), but more recently it was believed that the brain pressure which is induced by linear acceleration did not  induce brain deformation in TBI. This is because linear acceleration is not significantly correlated with brain deformation ([Ji et al., 2014](https://link.springer.com/article/10.1007%2Fs10237-014-0562-z)).  
 
 <img src="https://github.com/weizhao-BME/metis-project4/blob/main/figures/fig.3.png" alt="Figure 3" width="700"/>
 
