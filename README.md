@@ -48,21 +48,19 @@ The figure below shows the total counts of publications each year, demonstrating
 
 <img src="https://github.com/weizhao-BME/metis-project4/blob/main/figures/counts_of_publications.svg" alt="counts of pub" width="700"/>
 
-Top 10 most popular journals have been identified
-
-
+Top 10 most popular journals have been identified. The most popular journal is Journal of Neurotrauma (IF of 4.056). Three of my research papers published there were selected as front cover pages. 
 
 <img src="https://github.com/weizhao-BME/metis-project4/blob/main/figures/top_10_most_pop_journals_over_30_years.svg" alt="top 10" width="700"/>
 
+<img src="https://github.com/weizhao-BME/metis-project4/blob/main/figures/cover_pages_j_neurotrauma.svg" alt="cover" width="700"/>
 
 
-The results show five examples of topic development for illustration. 
 
-
+The results show five examples of topic development for illustration. First, for the topic of brain biomechanics, it is not as hot as that in 1990s,  but is likely to maintain a stable development trend in the next five years. 
 
 <img src="https://github.com/weizhao-BME/metis-project4/blob/main/figures/fig.2.png" alt="Figure 2" width="700"/>
 
-
+Researchers become less interested in the intracranial pressure now compared with 1990s. In the past, it was believed the pressure gradient could distort the brain and caused concussion ([King et al., 2013]([0.1 Is Head Injury Caused by Linear or Angular Acceleration? (smf.org)](https://smf.org/docs/articles/hic/King_IRCOBI_2003.pdf))), but more recently it was believed that the brain pressure which is induced by linear acceleration did not  induce brain deformation in TBI. This is because linear acceleration is not significantly correlated with brain deformation ([Ji et al., 2014]([Head impact accelerations for brain strain-related responses in contact sports: a model-based investigation | SpringerLink](https://link.springer.com/article/10.1007%2Fs10237-014-0562-z))).  
 
 <img src="https://github.com/weizhao-BME/metis-project4/blob/main/figures/fig.3.png" alt="Figure 3" width="700"/>
 
