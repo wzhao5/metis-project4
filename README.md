@@ -54,8 +54,6 @@ Top 10 most popular journals have been identified. The most popular journal is J
 
 <img src="https://github.com/weizhao-BME/metis-project4/blob/main/figures/cover_pages_j_neurotrauma.png" alt="cover" width="700"/>
 
-
-
 The results show five examples of topic development for illustration. First, for the topic of brain biomechanics, it is not as hot as that in 1990s,  but is likely to maintain a stable development trend in the next five years. 
 
 <img src="https://github.com/weizhao-BME/metis-project4/blob/main/figures/fig.2.png" alt="Figure 2" width="700"/>
@@ -64,11 +62,11 @@ Researchers become less interested in the intracranial pressure now compared wit
 
 <img src="https://github.com/weizhao-BME/metis-project4/blob/main/figures/fig.3.png" alt="Figure 3" width="700"/>
 
-
+The topic of brain kinematics was very hot in 2000s. But more recently, the number of publications kept decreasing. This might be because the studies converged to a small and specific scope. In addition, brain kinematics do not directly inform brain deformation. Another possible reason could be that the NMF model believed that some articles about brain kinematics were related to sports concussion and assigned these articles to that topic. 
 
 <img src="https://github.com/weizhao-BME/metis-project4/blob/main/figures/fig.4.png" alt="Figure 4" width="700"/>
 
-
+For sports con
 
 <img src="https://github.com/weizhao-BME/metis-project4/blob/main/figures/fig.5.png" alt="Figure 5" width="700"/>
 
