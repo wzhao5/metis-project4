@@ -14,7 +14,7 @@ Final presentation is posted [here](https://github.com/weizhao-BME/metis-project
 
 ### **Introduction** 
 
-When writing a research proposal, the first thing is to choose a research topic. Therefore, it is important to systematically investigate the development of research topics and understand how the research field has been evolving. In this analysis, the evolution of research topics related to traumatic brain injury was investigated using an natural language processing approach so that academic researchers can better understand the historical and current situation of this field. 
+When writing a research proposal, the first thing is to choose a research topic. But many junior researchers are sill struggling with this problem. Some may believe that reading sufficient system review papers would help them target a research topic. But it is not sufficient at all. When finding a research topic, it is important to systematically investigate the development of research topics and understand how the research field has been evolving. Identifying hot research topics, clustering research articles with a hot topic, and reading these clustered articles will be more efficient and more focused for those junior researchers. For illustration of this method, the evolution of research topics related to traumatic brain injury was investigated using an natural language processing approach so that academic researchers can use this method to find hot research topics that they are interested in. 
 
 ***********************
 
@@ -66,27 +66,17 @@ The topic of brain kinematics was very hot in 2000s. But more recently, the numb
 
 <img src="https://github.com/weizhao-BME/metis-project4/blob/main/figures/fig.4.png" alt="Figure 4" width="700"/>
 
-For sports con
+Sports concussion is a very hot research topic currently, and will remain a hot topic in next five years. More and more recent research findings have opened a door for more research opportunities, e.g.,  ([Zhao et al., 2017](https://pubmed.ncbi.nlm.nih.gov/28710533/)). In addition, the NFL foundation has opened more funding opportunities for researchers ([REF](https://www.nflfoundation.org/applications/grant_programs)). 
 
 <img src="https://github.com/weizhao-BME/metis-project4/blob/main/figures/fig.5.png" alt="Figure 5" width="700"/>
 
-
+Similar to sports concussion, blast injury has become a hot topic now, and is likely to remain hot in the future. One possible reason could be that the DoD has opened more funding programs than before ([REF](https://blastinjuryresearch.amedd.army.mil/index.cfm/brain_health_program/maximize_research)). More and more research articles were published towards the understanding of the biomechanical mechanisms behind blast injury, e.g., [Aravind et al., 2020](https://pubmed.ncbi.nlm.nih.gov/33013653/) and [Kim et al., 2020](https://pubmed.ncbi.nlm.nih.gov/32614198/). 
 
 <img src="https://github.com/weizhao-BME/metis-project4/blob/main/figures/fig.6.png" alt="Figure 6" width="700"/>
-
-
-
-
 
 ---
 
 ### Conclusions
 
-XX
-
-
-
-
-
-
+In the context of traumatic brain injury, this analysis presented an approach for academic researchers to know the evolution hot research topics that they are interested in. Therefore, I suggest running a topic modeling as proposed in this analysis,  clustering articles with identified research topics, choosing a hot topic, which will remain hot in the future,  and reading the clustered articles before roaming in the sea of articles. 
 
