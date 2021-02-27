@@ -52,7 +52,7 @@ Top 10 most popular journals have been identified. The most popular journal is J
 
 <img src="https://github.com/weizhao-BME/metis-project4/blob/main/figures/top_10_most_pop_journals_over_30_years.svg" alt="top 10" width="700"/>
 
-<img src="https://github.com/weizhao-BME/metis-project4/blob/main/figures/cover_pages_j_neurotrauma.svg" alt="cover" width="700"/>
+<img src="https://github.com/weizhao-BME/metis-project4/blob/main/figures/cover_pages_j_neurotrauma.png" alt="cover" width="700"/>
 
 
 
