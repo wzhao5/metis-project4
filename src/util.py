@@ -7,16 +7,18 @@ Created on Fri Feb 12 21:34:08 2021
 """
 import pickle
 import string
-from textblob import Word
-from nltk import word_tokenize
-from nltk import pos_tag
 import re
 from collections import defaultdict
 from itertools import chain
+from math import sqrt
+
+from textblob import Word
+from nltk import word_tokenize
+from nltk import pos_tag
+
 from nltk.corpus import stopwords
 import matplotlib.pyplot as plt
 
-from math import sqrt
 from statsmodels.tsa.arima.model import ARIMA
 from sklearn.metrics import mean_squared_error
 #%%
@@ -365,7 +367,7 @@ def evaluate_models(dataset,
                     q_values,
                     training_portion=0.66):
     """
-    Fucntion to tune hyperparameters of arima model 
+    Fucntion to tune hyperparameters of arima model
 
     Parameters
     ----------
@@ -401,4 +403,3 @@ def evaluate_models(dataset,
                     continue
     print('Best ARIMA%s RMSE=%.3f' % (best_cfg, best_score))
     return best_cfg, best_score
-
